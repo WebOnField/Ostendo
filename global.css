@@ -1,0 +1,135 @@
+/* Headings */
+h1, h2, h3 {
+  color: #0058e0;
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main heading */
+h1 {
+  font-weight: 700;
+  font-size: 2.3rem;
+  line-height: 1.2;
+  margin: 0 0 30px 0;
+}
+
+/* Main heading with logo */
+h1 img {
+  vertical-align: -4px;
+  width: 35px;
+}
+
+/* Subheading */
+h2 {
+  font-weight: 500;
+  font-size: 1.7rem;
+  line-height: 1.2;
+  margin: 0 0 15px 0;
+}
+
+/* Minor heading */
+h3 {
+  font-weight: 500;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  margin: 0 0 10px 0;
+}
+
+/* Buttons */
+button {
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  text-align: center;
+  border: 2px solid #0058e0;
+  padding: 11px 24px;
+  min-height: 44px;
+  min-width: 44px;
+  color: #202223;
+  background: #ffffff;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 1.1em;
+  box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+button:hover,
+button:focus {
+  background: #0058e0;
+  color: #fff;
+  outline: 1px solid transparent;
+}
+
+button[aria-expanded="false"] + div {
+  display: none;
+}
+
+/* Blocs */
+.el {
+  box-shadow: 6px 6px 0px 0px #0058e0, 0px 0px 0px 2px #4086f5;
+  padding: 1.4em;
+  margin: 2em 0;
+  border-radius: 7px;
+}
+
+/* Collapse */
+.chevron::before {
+  border-style: solid;
+  border-width: 0.25em 0.25em 0 0;
+  content: '';
+  display: inline-block;
+  height: 0.45em;
+  left: 0.15em;
+  position: relative;
+  top: 0.15em;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  width: 0.45em;
+  margin-right: 10px;
+  margin-top: 1px;
+  transition: transform .2s ease-in-out;
+}
+
+.chevron.right:before {
+  left: 0;
+  transform: rotate(45deg);
+}
+
+.chevron.bottom:before {
+  top: 0;
+  transform: rotate(135deg);
+}
+
+.chevron.left:before {
+  left: 0.25em;
+  transform: rotate(-135deg);
+}
+
+/* A11Y */
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+          clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important;
+}
+
+.sr-only-focusable:focus,
+.sr-only-focusable:active {
+  clip: auto !important;
+  -webkit-clip-path: none !important;
+          clip-path: none !important;
+  height: auto !important;
+  margin: auto !important;
+  overflow: visible !important;
+  width: auto !important;
+  white-space: normal !important;
+}

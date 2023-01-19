@@ -1,0 +1,11 @@
+body {
+    width: 23rem;
+    min-height: 18rem;
+    padding: 0.6em 1em;
+}
+.info.activate{
+    color: #005c04;
+}
+.info.disable{
+    color: #9e0101;
+}

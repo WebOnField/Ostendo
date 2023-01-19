@@ -1,0 +1,50 @@
+body{
+  width: 70vw;
+  display: block;
+  margin: 5px auto;
+  box-shadow: 0px 0px 7px -2px #0158e0;
+  padding: 2em 4em;
+  font-size: 0.9em;
+}
+.form_group {
+    margin: 2em 0;
+}
+label {
+    font-size: 1.3em;
+}
+
+div#message {
+    background: #0158e0;
+    padding: 0.5em 0.7em;
+    color: #fff;
+    font-size: 1.1em;
+}
+div#message p{
+  margin: 0;
+}
+button#close_status {
+    float: right;
+}
+#save{
+  margin-top: 14px;
+  display: block;
+}
+.faq{
+  margin: auto 1em 1em 1em;
+}
+.faq button{
+  width: 100%;
+  text-align: left;
+  padding-left: 14px;
+  display: block;
+  white-space: normal;
+}
+.faq .disclosee{
+  padding: 1em;
+  border: 2px solid #2F61B3;
+  border-top: none;
+  background: #fff;
+}
+hr{
+  margin: 1rem 0;
+}

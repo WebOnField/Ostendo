@@ -1,0 +1,95 @@
+<!doctype html>
+  <html class="no-js" lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Options de l'extension - Ostendo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="settings.css">
+  </head>
+  <body>
+    <header role="banner" class="site-header">
+        <h1><img src="../logo/googleaccess_48.png" alt=""> Ostendo</h1>
+        <h2>Options de l'extension</h2>
+        <p>Version : <span id="version"></span></p>
+        <p>Aucun champ du formulaire n'est obligatoire</p>
+    </header>
+
+    <main id="content" role="main">
+        <div id="message" hidden>
+            <div id="status" role="status"></div>
+        </div>
+        <div class="form_group el">
+            <h3>Affichage dans les résultats de Google</h3>
+            <input type="checkbox" name="option_activate" id="option_activate">
+            <label for="option_activate">Afficher l'information de l'accessibilité du site dans les résultats de recherche Google</label>
+            <hr>
+            <h3>Trier les résultats</h3>
+            <input type="checkbox" name="option_order" id="option_order" aria-describedby="help_order">
+            <label for="option_order">Trier les résultats de Google selon l'accessibilité du site (du plus accessible au moins acccessible)</label>
+            <p id="help_order">Le tri sera fait sur chaque page de résultats et non pas sur l'ensemble des résultats. L'ordre du trie sera : résultats totalement accessible, résultats partiellement accessible, résultats sans notion d'accessibilité, résultats non accessible puis résultats sans déclaration d'accessibilité obligatoire.</p>
+            <hr>
+            <h3>Masquer le lien vers la déclaration d'accessibilité</h3>
+            <input type="checkbox" name="option_rgaa_link" id="option_rgaa_link">
+            <label for="option_rgaa_link">Masquer le lien vers la déclaration d'accessibilité du site dans les résultats de Google</label>
+            <hr>
+            <button id="save" type="button">Enregistrer les options</button>
+        </div>
+        <div class="el">
+            <h3>Foire aux questions</h3>
+            <div class="faq">
+                <button type="button" id="btnDisc01" class="disclosure" aria-expanded="false" aria-controls="Disclosed01"><span class="chevron right" aria-hidden="true"></span> À quoi correspond l'information de l'accessibilité affichée dans les résultats de Google ?</button>
+                <div id="Disclosed01" class="disclosee">
+                  <p>L'information retranscrit l'état de conformité au RGAA (Référentiel général d'amélioration de l'accessibilité) fourni par le site sur sa page d'accueil.</p>
+                  <p>il existe 3 états de conformité d'accessibilité d'un site dépendant du calcul du taux de conformité :</p>
+                  <ul>
+                      <li>Conformité totale, si tous les critères de contrôle du RGAA sont respectés, est retranscrit "Site accessible aux personnes handicapées"</li>
+                      <li>Conformité partielle, si au moins 50 % des critères de contrôle du RGAA sont respectés, est retranscrit "Site partiellement accessible aux personnes handicapées"</li>
+                      <li>Non-conformité, s’il n’existe aucun résultat d’audit en cours de validité permettant de mesurer le respect des critères ou si moins de 50 % des critères de contrôle du RGAA sont respectés, est retranscrit "Site non accessible aux personnes handicapées"</li>
+                  </ul>
+                  <p>Le taux de conformité d'accessibilité d'un site se calcule grace à un audit selon le RGAA</p>
+                  <p><a target="_blank" href="https://www.numerique.gouv.fr/publications/rgaa-accessibilite/">Plus d'informations sur le RGAA - numerique.gouv.fr (nouvel onglet)</a></p>
+                </div>
+            </div>
+            <div class="faq">
+                <button type="button" id="btnDisc02" class="disclosure" aria-expanded="false" aria-controls="Disclosed02"><span class="chevron right" aria-hidden="true">Le site comporte une déclaration d'accessibilité mais l'extension n'affiche aucune information sur Google</button>
+                <div id="Disclosed02" class="disclosee">
+                  <p>Actuellement l'information rendue visible sur Google se base sur l'état de conformité déclaré par le site. Si celui-ci n'a pas mentionné son état de conformité sur la page d'accueil (exemple : "Accessibilité : Partiellement conforme") alors aucune information n'est remontée.</p>
+                  <p>Dans une future version de l'extension, les informations seront reprises directement depuis la déclaration d'accessibilité du site.</p>
+                </div>
+            </div>
+            <div class="faq">
+                <button type="button" id="btnDisc03" class="disclosure" aria-expanded="false" aria-controls="Disclosed03"><span class="chevron right" aria-hidden="true">Le site n'a pas de déclaration d'accessibilité alors qu'il est dans l'obligation d'en avoir une mais l'extension n'affiche aucune information sur Google</button>
+                <div id="Disclosed03" class="disclosee">
+                  <p>Cette fonctionnalité est en cours de mise en place.</p>
+                  <p>Une base de donnée des sites ayant l'obligation de publier une déclaration d'accessibilité est en place et continuera d'être mise à jours.</p>
+                 <p><a target="_blank" href="../json/list.json">Ouvrir le fichier JSON de la base de donnée (nouvel onglet)</a></p>
+                 <p>Vous pouvez me remonter des URL de sites qui devraient être présentes dans la base de donnée en m'envoyant un mail à ostendo.extension@gmail.com</p>
+                </div>
+            </div>
+            <div class="faq">
+                <button type="button" id="btnDisc04" class="disclosure" aria-expanded="false" aria-controls="Disclosed04"><span class="chevron right" aria-hidden="true">L'extension ne fonctionne pas</button>
+                <div id="Disclosed04" class="disclosee">
+                  <p>Désolé d'entendre ça !</p>
+                  <p>Merci de m'envoyer un mail à ostendo.extension@gmail.com avec les informations suivantes :</p>
+                  <ul>
+                      <li>Version de votre OS</li>
+                      <li>Version du navigateur</li>
+                      <li>Version de l'extension (clique droit sur l'extension, puis gérer l'extension)</li>
+                      <li>Description du problème</li>
+                      <li>Toutes autres informations pertinentes</li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer role="contentinfo" class="site-footer">
+        <p>"Ostendo" est une extension Chrome développée par Pierre ALBERT - <a href="https://twitter.com/Le_Pilier" target="_blank">Mon Twitter (nouvel onglet)</a> - <a href="https://www.linkedin.com/in/pierre-albert/" target="_blank">Mon LinkedIn (nouvel onglet)</a>.</p>
+        <p><a target="_blank" href="../changelog.md">Ouvrir le Changelog.md (nouvel onglet)</a></p>
+    </footer>
+    <script src="settings.js"></script>
+  </body>
+</html>
