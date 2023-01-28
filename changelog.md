@@ -6,6 +6,10 @@ All notable changes to the Ostendo extension will be documented in this file.
 - Continue to add URL to the Json list
 - Find a way to get HTML DOM from websites with JS framework that only render DOM in javascript
 
+## [1.2] - 28 january 2022
+### Added
+- Add some URL to the JSON 
+
 ## [1.1] - 18 january 2022
 ### Improvement
 - Overall code improvement and added comment
