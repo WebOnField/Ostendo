@@ -19,7 +19,8 @@ chrome.runtime.onConnect.addListener(port => {
             action: "domHtml",
             domHtml: html,
             href: msg.href,
-            hrefID: msg.hrefID
+            hrefID: msg.hrefID,
+            searchEngine: msg.searchEngine,
           });
         })
         .catch(err => {
@@ -29,8 +30,10 @@ chrome.runtime.onConnect.addListener(port => {
   });
 });
 
+
 async function fetchUrl(url) {
   // This function fetches the HTML of a specific URL using the Fetch API.
   const response = await fetch(url);
   return response.text();
 }
+

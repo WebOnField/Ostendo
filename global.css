@@ -1,7 +1,12 @@
+
+
 /* Headings */
 h1, h2, h3 {
   color: #0058e0;
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body{
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, Verdana, Arial, sans-serif};
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

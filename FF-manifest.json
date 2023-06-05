@@ -1,27 +1,36 @@
 {
+   "browser_specific_settings": {
+     "gecko": {
+       "id": "ostendo.extension@gmail.com",
+       "strict_min_version": "53.0"
+     }
+   },
     "manifest_version": 3,
     "name": "Ostendo - l'Accessibilité des sites français",
-    "description": "Ostendo permet d'afficher, dans vos résultats de recherches Bing et Google, le niveau d'accessibilité des sites français.",
+    "description": "Ostendo permet d'afficher, dans vos résultats de recherches Google, le niveau d'accessibilité des sites français.",
     "version": "1.3",
     "icons": {
         "16": "logo/googleaccess_16.png",
         "48": "logo/googleaccess_48.png",
         "128": "logo/googleaccess_128.png"
     },
-    "options_page": "settings/settings.html",
+    "options_ui": {
+      "page": "settings/settings.html"
+    },
     "action": {
         "default_title": "Ostendo",
         "default_popup": "popup/popup.html"
     },
     "permissions": [
-        "storage"
+        "storage",
+        "webRequest"
     ],
     "host_permissions": [
         "*://*/*",
         "https://*/*"
     ],
     "background": {
-        "service_worker": "service-worker.js"
+        "scripts": ["service-worker.js"]
     },
     "web_accessible_resources": [
         {
@@ -35,6 +44,6 @@
     ],
     "content_scripts": [{
         "js": ["foreground.js"],
-        "matches": ["https://www.google.com/search?q=*","https://www.bing.com/search?q=*"]
+        "matches": ["https://www.google.com/*"]
     }]
 }

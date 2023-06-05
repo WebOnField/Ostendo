@@ -21,9 +21,9 @@
             <div id="status" role="status"></div>
         </div>
         <div class="form_group el">
-            <h3>Affichage dans les résultats de Google</h3>
+            <h3>Affichage dans les résultats de recherche Bing et Google</h3>
             <input type="checkbox" name="option_activate" id="option_activate">
-            <label for="option_activate">Afficher l'information de l'accessibilité du site dans les résultats de recherche Google</label>
+            <label for="option_activate">Afficher l'information de l'accessibilité du site dans les résultats de recherche Bing et Google</label>
             <hr>
             <h3>Trier les résultats</h3>
             <input type="checkbox" name="option_order" id="option_order" aria-describedby="help_order">
@@ -32,14 +32,14 @@
             <hr>
             <h3>Masquer le lien vers la déclaration d'accessibilité</h3>
             <input type="checkbox" name="option_rgaa_link" id="option_rgaa_link">
-            <label for="option_rgaa_link">Masquer le lien vers la déclaration d'accessibilité du site dans les résultats de Google</label>
+            <label for="option_rgaa_link">Masquer le lien vers la déclaration d'accessibilité du site</label>
             <hr>
             <button id="save" type="button">Enregistrer les options</button>
         </div>
         <div class="el">
             <h3>Foire aux questions</h3>
             <div class="faq">
-                <button type="button" id="btnDisc01" class="disclosure" aria-expanded="false" aria-controls="Disclosed01"><span class="chevron right" aria-hidden="true"></span> À quoi correspond l'information de l'accessibilité affichée dans les résultats de Google ?</button>
+                <button type="button" id="btnDisc01" class="disclosure" aria-expanded="false" aria-controls="Disclosed01"><span class="chevron right" aria-hidden="true"></span> À quoi correspond l'information de l'accessibilité affichée dans les résultats de Bing et Google ?</button>
                 <div id="Disclosed01" class="disclosee">
                   <p>L'information retranscrit l'état de conformité au RGAA (Référentiel général d'amélioration de l'accessibilité) fourni par le site sur sa page d'accueil.</p>
                   <p>il existe 3 états de conformité d'accessibilité d'un site dépendant du calcul du taux de conformité :</p>
@@ -53,19 +53,22 @@
                 </div>
             </div>
             <div class="faq">
-                <button type="button" id="btnDisc02" class="disclosure" aria-expanded="false" aria-controls="Disclosed02"><span class="chevron right" aria-hidden="true">Le site comporte une déclaration d'accessibilité mais l'extension n'affiche aucune information sur Google</button>
+                <button type="button" id="btnDisc02" class="disclosure" aria-expanded="false" aria-controls="Disclosed02"><span class="chevron right" aria-hidden="true">Le site comporte une déclaration d'accessibilité mais l'extension n'affiche aucune information sur Bing et Google</button>
                 <div id="Disclosed02" class="disclosee">
                   <p>Actuellement l'information rendue visible sur Google se base sur l'état de conformité déclaré par le site. Si celui-ci n'a pas mentionné son état de conformité sur la page d'accueil (exemple : "Accessibilité : Partiellement conforme") alors aucune information n'est remontée.</p>
                   <p>Dans une future version de l'extension, les informations seront reprises directement depuis la déclaration d'accessibilité du site.</p>
                 </div>
             </div>
             <div class="faq">
-                <button type="button" id="btnDisc03" class="disclosure" aria-expanded="false" aria-controls="Disclosed03"><span class="chevron right" aria-hidden="true">Le site n'a pas de déclaration d'accessibilité alors qu'il est dans l'obligation d'en avoir une mais l'extension n'affiche aucune information sur Google</button>
+                <button type="button" id="btnDisc03" class="disclosure" aria-expanded="false" aria-controls="Disclosed03"><span class="chevron right" aria-hidden="true">Le site n'a pas de déclaration d'accessibilité, alors qu'il est légalement concerné, mais l'extension n'affiche aucune information sur Bing et Google</button>
                 <div id="Disclosed03" class="disclosee">
                   <p>Cette fonctionnalité est en cours de mise en place.</p>
                   <p>Une base de donnée des sites ayant l'obligation de publier une déclaration d'accessibilité est en place et continuera d'être mise à jours.</p>
                  <p><a target="_blank" href="../json/list.json">Ouvrir le fichier JSON de la base de donnée (nouvel onglet)</a></p>
-                 <p>Vous pouvez me remonter des URL de sites qui devraient être présentes dans la base de donnée en m'envoyant un mail à ostendo.extension@gmail.com</p>
+                 <h4>Vous avez trouvé une URL d'un site concerné par l’obligation d’accessibilité ?</h4>
+                 <p>Vous pouvez me remonter le ou les URL de sites qui devraient être présentes dans la base de donnée en m'envoyant un mail à ostendo.extension@gmail.com</p>
+                 <h4>L'url de votre site ce trouve dans la base de donnée alors que celui-ci n'est pas soumis à l’obligation d’accessibilité ?</h4>
+                 <p>Vous pouvez me remonter le ou les URL de sites qui ne devraient être présentes dans la base de donnée en m'envoyant un mail à ostendo.extension@gmail.com</p>
                 </div>
             </div>
             <div class="faq">
@@ -87,7 +90,8 @@
     </main>
 
     <footer role="contentinfo" class="site-footer">
-        <p>"Ostendo" est une extension Chrome développée par Pierre ALBERT - <a href="https://twitter.com/Le_Pilier" target="_blank">Mon Twitter (nouvel onglet)</a> - <a href="https://www.linkedin.com/in/pierre-albert/" target="_blank">Mon LinkedIn (nouvel onglet)</a>.</p>
+        <p>"Ostendo" est une extension Chrome développée par Pierre ALBERT, Expert accessibilité numérique et qualité web chez <a href="https://www.temesis.com/" target="_blank">Temesis (nouvel onglet)</a></p>
+        <p><a href="https://twitter.com/Le_Pilier" target="_blank">Mon Twitter (nouvel onglet)</a> - <a href="https://www.linkedin.com/in/pierre-albert/" target="_blank">Mon LinkedIn (nouvel onglet)</a>.</p>
         <p><a target="_blank" href="../changelog.md">Ouvrir le Changelog.md (nouvel onglet)</a></p>
     </footer>
     <script src="settings.js"></script>
