@@ -5,6 +5,10 @@ chrome.storage.sync.get('option_activate', function(response) {
     let searchSelector;
     let searchEngine;
     switch (window.location.hostname) {
+      case 'www.google.fr':
+        searchSelector = "div[data-hveid] .yuRUbf > a";
+        searchEngine = "google";
+        break;
       case 'www.google.com':
         searchSelector = "div[data-hveid] .yuRUbf > a";
         searchEngine = "google";
