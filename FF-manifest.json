@@ -44,6 +44,6 @@
     ],
     "content_scripts": [{
         "js": ["foreground.js"],
-        "matches": ["https://www.google.com/*"]
+        "matches": ["https://www.google.fr/search?q=*","https://www.google.com/search?q=*","https://www.bing.com/search?q=*"]
     }]
 }
