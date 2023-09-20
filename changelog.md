@@ -7,6 +7,13 @@ All notable changes to the Ostendo extension will be documented in this file.
 - Find a way to get HTML DOM from websites with JS framework that only render DOM in javascript
 - Port to Firefox (already done but need to understand how permission for all url in manifest v3 work)
 
+## [1.4] - 20 septembre 2023
+### Fixed
+- Fixes to make the plugin work again on Google (Google change is HTML DOM structure)
+- Add google.fr & bing.fr to the list of search engines (thanks to Olivier Keul https://twitter.com/okeul)
+### Improvement
+- Removed ~200 duplicates from JSON list (thanks to Philippe Vayssière https://twitter.com/PhilippeVay)
+
 ## [1.3] - 24 may 2023
 ### Added
 - Add Bing Search support

@@ -6,10 +6,12 @@ chrome.storage.sync.get('option_activate', function(response) {
     let searchEngine;
     switch (window.location.hostname) {
       case 'www.google.com':
-        searchSelector = "div[data-hveid] .yuRUbf > a";
+      case 'www.google.fr':
+        searchSelector = "div[data-hveid] .yuRUbf a";
         searchEngine = "google";
         break;
       case 'www.bing.com':
+      case 'www.bing.fr':
         searchSelector = "#b_results>li.b_algo h2 a[h]";
         searchEngine = "bing";
         break;
@@ -31,7 +33,7 @@ chrome.storage.sync.get('option_activate', function(response) {
         case 'bing':
             hrefID = resultLink.getAttribute("h");
           break;
-      } 
+      }
       // Send a message to the background script with the url to fetch and the id of the search result
       // it's to recover the html dom without having CORS problems
       // IMPORTANT :
@@ -211,9 +213,9 @@ function addInGoogleResult(options) {
         divResults = document.querySelector("div[data-hveid="+hrefID+"]");
         // Add the class name to the parent div
         divResults.closest(".MjjYud").classList.add(className);
-        divResultsLink = divResults.querySelector('.yuRUbf > a:not([aria-describedby])');
-        divResultsLinkWAD = divResults.querySelector('.yuRUbf > a');
-        divResultsTitle = divResults.querySelector('.yuRUbf > a:not([aria-describedby]) h3');
+        divResultsLink = divResults.querySelector('.yuRUbf a:not([aria-describedby])');
+        divResultsLinkWAD = divResults.querySelector('.yuRUbf a');
+        divResultsTitle = divResults.querySelector('.yuRUbf a:not([aria-describedby]) h3');
         break;
       case 'bing':
         // Select the div of the bing result with the h attribute matching the passed in hrefID
