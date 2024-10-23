@@ -26,6 +26,23 @@ chrome.runtime.onConnect.addListener(port => {
         .catch(err => {
           console.log("Failed to fetch page: ", err);
         });
+    } else if (msg.action === "declaUrlToFetch") {
+      // This message is sent when the content script wants the extension to fetch the HTML of a specific URL.
+      fetchUrl(msg.href)
+        .then(html => {
+          // Once the HTML is fetched, we send a message back to the content script with the HTML and other information.
+          port.postMessage({
+            action: "declaDomHtml",
+            domHtml: html,
+            href: msg.href,
+            hrefID: msg.hrefID,
+            searchEngine: msg.searchEngine,
+            textLink: msg.textLink,
+          });
+        })
+        .catch(err => {
+          console.log("Failed to fetch page: ", err);
+        });
     }
   });
 });
