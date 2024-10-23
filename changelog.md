@@ -2,10 +2,17 @@
 All notable changes to the Ostendo extension will be documented in this file.
 
 ## [Unreleased]
-- Retrieve information from the accessibility declaration
 - Continue to add URL to the Json list (thanks to https://www.webscraper.io/)
 - Find a way to get HTML DOM from websites with JS framework that only render DOM in javascript
 - Port to Firefox (already done but need to understand how permission for all url in manifest v3 work)
+
+## [1.5] -  octobre 2024
+### Added
+- Add .gitignore file (thanks to Nicolas Verlhiac https://github.com/nicolasverlhiac)
+### Improvement
+- Directly display the "Taux de conformité" retrieved from the accessibility statement, for the link to the statement, if it exists.
+- Display the link to the "Schéma pluriannuel"
+- Change design (font-size, color pallet)
 
 ## [1.4] - 20 septembre 2023
 ### Fixed

@@ -45,6 +45,7 @@ chrome.storage.sync.get('option_activate', function(response) {
       if (msg.action === "domHtml"){
         // A message is received from the background script with the HTML of the page as a text/plain
         const parser = new DOMParser();
+
         // Parse the text/plain of the html fetched to get the HTML document
         let doc = parser.parseFromString(msg.domHtml, "text/html");
         // Retrieve all the links in the HTML document
@@ -92,8 +93,9 @@ chrome.storage.sync.get('option_activate', function(response) {
             declaHref = new URL(declaHref);
             // check if the text includes the words "conforme" or "conformité"
             if( textLinkLowerCase.includes("conforme") || textLinkLowerCase.includes("conformité")){
-              // Call the function dealwithA11yInfo and pass the text, the hrefID, and the declaration href
-              dealwithA11yInfo(textLinkLowerCase, msg.hrefID, declaHref, searchEngine);
+              // Send a message to the background script with the "déclaration d'accessibilité url to fetch and the id of the search result
+              // it's to recover the html dom without having CORS problems
+              port.postMessage({action: "declaUrlToFetch", href: declaHref, hrefID: msg.hrefID, searchEngine: searchEngine, textLink: textLinkLowerCase});
               // Stop the "every" loop
               return false;
             }
@@ -105,6 +107,50 @@ chrome.storage.sync.get('option_activate', function(response) {
           }
           return true;
         });
+      } else if (msg.action === "declaDomHtml"){
+        // A message is received from the background script with the HTML of the page as a text/plain
+        const parser = new DOMParser();
+        // Parse the text/plain of the html fetched to get the HTML document
+        let doc = parser.parseFromString(msg.domHtml, "text/html");
+        // Get all text from page
+        let bodyText = doc.body.innerText;
+
+        // Regex to find the "taux d'accessibilité"
+        let regex = /(?:taux d’accessibilité de\s+(\d+(?:[.,]\d+)?))\s*%|(\d+(?:[.,]\d+)?)(?=\s*%\s*(?:des critères|au RGAA))/g;
+        let match;
+        let lastMatch = null;
+        let schemaUrl = null;
+        // Get throuht all and select the last one
+        // (sometimes website display the old and new one "taux")
+        // NEED IMPROVEMENT
+        while ((match = regex.exec(bodyText)) !== null) {
+            lastMatch = match[1] || match[2];  // Get the number
+        }
+        // Search all link to get the one to the "Schéma"
+        let links = doc.querySelectorAll('a[href]'); 
+        let hrefURL = new URL(msg.href);
+        // Get throught all the link to find the one talking about "Schéma pluriannuel"
+        links.forEach((link) => {
+            if (link.textContent.includes("chéma pluriannuel")) {
+              schemaUrl = link.getAttribute("href");
+              if(!isValidHttpUrl(schemaUrl)){
+                if(schemaUrl.startsWith('/')){
+                  schemaUrl = hrefURL.origin+schemaUrl;
+                }else{
+                  schemaUrl = hrefURL.origin+"/"+schemaUrl;
+                }
+              }
+              schemaUrl = new URL(schemaUrl);
+            }
+        });
+        if (lastMatch) {
+          let pourcent = lastMatch;
+          // Call the function dealwithA11yInfo with pourcent
+          dealwithA11yInfo(msg.textLink, msg.hrefID, msg.href, msg.searchEngine, pourcent, schemaUrl);
+        }else{
+          // Call the function dealwithA11yInfo without pourcents
+          dealwithA11yInfo(msg.textLink, msg.hrefID, msg.href, msg.searchEngine, 0, schemaUrl);
+        }
       }
     });
   }
@@ -122,13 +168,20 @@ function isValidHttpUrl(string) {
   return url.protocol === "http:" || url.protocol === "https:";
 }
 
-function dealwithA11yInfo(textLink, hrefID, declaHref, searchEngine) {
+function dealwithA11yInfo(textLink, hrefID, declaHref, searchEngine, pourcent, schema) {
   // Initialize variables
   let text;
   let className;
   let backgroundColor;
   let borderColor;
   let textColor;
+  let pourcentage;
+
+  if (pourcent == 0) {
+    pourcentage = "Déclaration d'accessibilité";
+  }else{
+    pourcentage = "Taux de conformité : "+pourcent+"%";
+  }
   // Check if the textLink is "must_be" and set the corresponding variables
   if(textLink == "must_be"){
     addInGoogleResult({
@@ -136,7 +189,9 @@ function dealwithA11yInfo(textLink, hrefID, declaHref, searchEngine) {
       hrefID: hrefID,
       declaHref: declaHref,
       searchEngine: searchEngine,
-      text: "Absence de déclaration d'accessibilité obligatoire",
+      text: "Accessibilité numérique : Absence de déclaration de conformité",
+      pourcent : pourcentage,
+      schema : schema,
       backgroundColor: "#ce0500",
       borderColor: "#f60700",
       textColor: "#fff4f4",
@@ -150,10 +205,11 @@ function dealwithA11yInfo(textLink, hrefID, declaHref, searchEngine) {
       hrefID: hrefID,
       declaHref: declaHref,
       searchEngine: searchEngine,
-      text: "Site partiellement accessible aux personnes handicapées",
-      backgroundColor: "#FFFBF3",
-      borderColor: "#ffded9",
-      textColor: "#5d2c20",
+      text: "Accessibilité numérique : partiellement conforme",
+      pourcent : pourcentage,
+      schema : schema,
+      backgroundColor: "#ffce90",
+      textColor: "#5b2213",
       className: "ostendo-pa"
     });
   }
@@ -164,10 +220,11 @@ function dealwithA11yInfo(textLink, hrefID, declaHref, searchEngine) {
       hrefID: hrefID,
       declaHref: declaHref,
       searchEngine: searchEngine,
-      text: "Site non accessible aux personnes handicapées",
-      backgroundColor: "#fff4f4",
-      borderColor: "#ffe9e9",
-      textColor: "#9b0703",
+      text: "Accessibilité numérique : non conforme",
+      pourcent : pourcentage,
+      schema : schema,
+      backgroundColor: "#ffc4c4",
+      textColor: "#490503",
       className: "ostendo-na"
     });
   }
@@ -178,9 +235,10 @@ function dealwithA11yInfo(textLink, hrefID, declaHref, searchEngine) {
       hrefID: hrefID,
       declaHref: declaHref,
       searchEngine: searchEngine,
-      text: "Site accessible aux personnes handicapées",
+      text: "Accessibilité numérique : totalement conforme",
+      pourcent : pourcentage,
+      schema : schema,
       backgroundColor: "#dffee6",
-      borderColor: "#b8fec9",
       textColor: "#204129",
       className: "ostendo-a"
     });
@@ -194,6 +252,8 @@ function addInGoogleResult(options) {
   const searchEngine = options.searchEngine;
   const declaHref = options.declaHref;
   const text = options.text;
+  const pourcent = options.pourcent;
+  const schemaUrl = options.schema;
   const backgroundColor = options.backgroundColor;
   const borderColor = options.borderColor;
   const textColor = options.textColor;
@@ -232,12 +292,19 @@ function addInGoogleResult(options) {
     if(!option_rgaa_link && declaHref && divResults){ 
       // Set an ID for the h3 tag
       divResultsTitle.setAttribute("id", "site-"+hrefID+"");
+      let schemaLink;
+      //create the link to the schéma if exist
+      if(schemaUrl != null){
+        schemaLink = "<span aria-hidden=\"true\"> · &lrm;</span><a href=\""+schemaUrl+"\" style=\"font-size:0.9rem;\" aria-labelledby=\"schema-"+hrefID+" site-"+hrefID+"\"><span id=\"schema-"+hrefID+"\">Schéma pluriannuel</span></a>";
+      }else{
+        schemaLink = "";
+      }
       // Insert the accessibility information with a link to the declaration of accessibility
       divResultsLink.insertAdjacentHTML('afterend', 
-        "<div><p style=\"margin:1px 0 4px 0;\"><span id=\"ostendo-"+hrefID+"\" style=\"background: "+backgroundColor+";color: "+textColor+";border: 1px solid "+borderColor+";padding: 2px 4px;border-radius: 4px;font-size:0.85rem;\">"+text+"</span><span aria-hidden=\"true\"> · &lrm;</span><a href=\""+declaHref+"\" style=\"font-size:0.9rem;\" aria-labelledby=\"decla-"+hrefID+" site-"+hrefID+"\"><span id=\"decla-"+hrefID+"\">Déclaration d'accessibilité</span></a></p></div>");
+        "<div><p style=\"margin:1px 0 4px 0;\"><span id=\"ostendo-"+hrefID+"\" style=\"background: "+backgroundColor+";color: "+textColor+";padding: 4px 5px;border-radius: 4px;font-size:0.9rem;\">"+text+"</span><span aria-hidden=\"true\"> · &lrm;</span><a href=\""+declaHref+"\" style=\"font-size:0.9rem;\" aria-labelledby=\"decla-"+hrefID+" site-"+hrefID+"\"><span id=\"decla-"+hrefID+"\">"+pourcent+"</span></a>"+schemaLink+"</p></div>");
     }else if(divResultsLink){
       // If the option_rgaa_link is set or there is no declaration of accessibility URL, insert the accessibility information without a link
-      divResultsLink.insertAdjacentHTML('afterend', "<div><p style=\"margin:1px 0 4px 0;\"><span id=\"ostendo-"+hrefID+"\" style=\"background: "+backgroundColor+";color: "+textColor+";border: 1px solid "+borderColor+";padding: 2px 4px;border-radius: 4px;font-size:0.85rem;\">"+text+"</span></p></div>");
+      divResultsLink.insertAdjacentHTML('afterend', "<div><p style=\"margin:1px 0 4px 0;\"><span id=\"ostendo-"+hrefID+"\" style=\"background: "+backgroundColor+";color: "+textColor+";padding: 4px 5px;border-radius: 4px;font-size:0.9rem;\">"+text+"</span></p></div>");
     }
     // Add the accessibility information's id to the link as aria-describedby attribute
     divResultsLinkWAD.setAttribute("aria-describedby", "ostendo-"+hrefID);
@@ -252,7 +319,7 @@ function addInGoogleResult(options) {
       switch (searchEngine) {
         case 'google':
           // Select the parent element where the search results are located
-          parent = document.querySelector(".v7W49e");
+          parent = document.querySelector("#search");
           lastSearchResult = parent.lastChild.nextSibling;
           break;
         case 'bing':
