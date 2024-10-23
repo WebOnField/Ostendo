@@ -8,7 +8,7 @@ Actuellement l'extension permet :
 
 Lien vers l'extension :
 - [Chrome](https://chrome.google.com/webstore/detail/ostendo-laccessibilit%C3%A9-de/hfbgfmeddkaplomgloehmhollecglldo?hl=fr)
-- [Firefox](https://addons.mozilla.org/fr/firefox/addon/ostendo-a11y-sites-fran%C3%A7ais/) (non fonctionnel pour le moment dû à un problème concernant les permissions qui doivent être manuellement activées dans les paramètres après installation)
+- ~~[Firefox](https://addons.mozilla.org/fr/firefox/addon/ostendo-a11y-sites-fran%C3%A7ais/)~~ (Actuellement supprimer car non fonctionnel...pour le moment)
 
 Comment cela fonctionne ? 
 - L'extension recherche sur la page un lien ayant pour intitulé "Accessibilité : XXX conforme" où XXX peut correspondre à "non", "partiellement" ou "totalement"
