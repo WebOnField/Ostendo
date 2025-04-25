@@ -300,11 +300,11 @@ function addInGoogleResult(options) {
         schemaLink = "";
       }
       // Insert the accessibility information with a link to the declaration of accessibility
-      divResultsLink.insertAdjacentHTML('afterend', 
+      divResults.querySelector('.yuRUbf').insertAdjacentHTML('afterend', 
         "<div><p style=\"margin:1px 0 4px 0;\"><span id=\"ostendo-"+hrefID+"\" style=\"background: "+backgroundColor+";color: "+textColor+";padding: 4px 5px;border-radius: 4px;font-size:0.9rem;\">"+text+"</span><span aria-hidden=\"true\"> · &lrm;</span><a href=\""+declaHref+"\" style=\"font-size:0.9rem;\" aria-labelledby=\"decla-"+hrefID+" site-"+hrefID+"\"><span id=\"decla-"+hrefID+"\">"+pourcent+"</span></a>"+schemaLink+"</p></div>");
     }else if(divResultsLink){
       // If the option_rgaa_link is set or there is no declaration of accessibility URL, insert the accessibility information without a link
-      divResultsLink.insertAdjacentHTML('afterend', "<div><p style=\"margin:1px 0 4px 0;\"><span id=\"ostendo-"+hrefID+"\" style=\"background: "+backgroundColor+";color: "+textColor+";padding: 4px 5px;border-radius: 4px;font-size:0.9rem;\">"+text+"</span></p></div>");
+      divResults.querySelector('.yuRUbf').insertAdjacentHTML('afterend', "<div><p style=\"margin:1px 0 4px 0;\"><span id=\"ostendo-"+hrefID+"\" style=\"background: "+backgroundColor+";color: "+textColor+";padding: 4px 5px;border-radius: 4px;font-size:0.9rem;\">"+text+"</span></p></div>");
     }
     // Add the accessibility information's id to the link as aria-describedby attribute
     divResultsLinkWAD.setAttribute("aria-describedby", "ostendo-"+hrefID);

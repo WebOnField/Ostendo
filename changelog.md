@@ -6,6 +6,10 @@ All notable changes to the Ostendo extension will be documented in this file.
 - Find a way to get HTML DOM from websites with JS framework that only render DOM in javascript
 - Port to Firefox (already done but need to understand how permission for all url in manifest v3 work)
 
+## [1.5.1] - 25 avril 2025
+### Fixed
+- Fixed Google display an position
+
 ## [1.5] -  octobre 2024
 ### Added
 - Add .gitignore file (thanks to Nicolas Verlhiac https://github.com/nicolasverlhiac)
