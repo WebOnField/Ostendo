@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Ostendo - l'Accessibilité des sites français",
     "description": "Ostendo affiche, dans vos résultats de recherches Bing et Google, le taux de conformité d'accessibilité des sites français.",
-    "version": "1.5.1",
+    "version": "1.6",
     "icons": {
         "16": "logo/googleaccess_16.png",
         "48": "logo/googleaccess_48.png",
